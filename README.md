@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -617,11 +617,11 @@
                     <ul class="space-y-4 text-gray-400">
                         <li class="flex items-start">
                             <i class="fas fa-envelope text-purple-400 mr-3 mt-1"></i>
-                            <span>contato@omddigital.com.br</span>
+                            <span>oliveiramarketing28@gmail.com</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-globe text-blue-400 mr-3 mt-1"></i>
-                            <span>www.omddigital.com.br</span>
+                            <span>bit.ly/OMD-IA</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-map-marker-alt text-purple-400 mr-3 mt-1"></i>
