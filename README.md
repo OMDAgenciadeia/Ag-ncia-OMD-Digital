@@ -18,6 +18,7 @@
             background-color: var(--dark-bg);
             color: white;
             overflow-x: hidden;
+            padding-top: 80px; /* Espaço para a navbar fixa */
         }
         
         .neon-text-blue {
@@ -45,8 +46,8 @@
         }
         
         .hero-section {
-            background: linear-gradient(rgba(15, 15, 26, 0.9), rgba(15, 15, 26, 0.9)), 
-                        url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background: linear-gradient(rgba(15, 15, 26, 0.9), rgba(15, 15, 26, 0.9)),
+                         url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
         }
@@ -69,11 +70,102 @@
         .pulse-animation {
             animation: pulse 3s infinite;
         }
+        
+        /* Carrossel */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+        
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        .carousel-content {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .carousel-indicator.active {
+            background-color: var(--neon-blue);
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.5rem;
+        }
+        
+        .carousel-prev {
+            left: 20px;
+        }
+        
+        .carousel-next {
+            right: 20px;
+        }
+        
+        .fixed-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="bg-black bg-opacity-80 backdrop-blur-md fixed w-full z-50">
+    <!-- Navbar Fixa -->
+    <nav class="fixed-nav bg-black bg-opacity-90 backdrop-blur-md shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center">
@@ -100,15 +192,60 @@
         </div>
     </nav>
 
+    <!-- Carrossel -->
+    <div class="carousel mt-20">
+        <!-- Slide 1 -->
+        <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+            <div class="carousel-content">
+                <h2 class="text-4xl font-bold mb-4 neon-text-blue">Transforme Seu WhatsApp em uma Máquina de Vendas!</h2>
+                <p class="text-xl mb-6">Empresas que adotaram nossa solução de IA para WhatsApp registraram aumento de até 70% nas vendas.</p>
+                <a href="#servicos" class="gradient-bg text-black font-bold py-3 px-8 rounded-full inline-block hover:opacity-90">Saiba Mais</a>
+            </div>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');">
+            <div class="carousel-content">
+                <h2 class="text-4xl font-bold mb-4 neon-text-lilac">Atendimento 24/7 com Inteligência Artificial</h2>
+                <p class="text-xl mb-6">Nossa IA trabalha enquanto você dorme, respondendo clientes e gerando oportunidades de negócio a qualquer hora.</p>
+                <a href="#servicos" class="gradient-bg text-black font-bold py-3 px-8 rounded-full inline-block hover:opacity-90">Conheça Nossos Planos</a>
+            </div>
+        </div>
+        
+        <!-- Slide 3 -->
+        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1600267165477-6d19ccd502a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+            <div class="carousel-content">
+                <h2 class="text-4xl font-bold mb-4 neon-text-blue">Clientes Satisfeitos em Todo o Brasil</h2>
+                <p class="text-xl mb-6">Mais de 500 empresas já transformaram seus resultados com nossas soluções tecnológicas.</p>
+                <a href="#clientes" class="gradient-bg text-black font-bold py-3 px-8 rounded-full inline-block hover:opacity-90">Veja Depoimentos</a>
+            </div>
+        </div>
+        
+        <!-- Botões de navegação -->
+        <button class="carousel-nav carousel-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-nav carousel-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <!-- Indicadores -->
+        <div class="carousel-indicators">
+            <div class="carousel-indicator active" data-slide="0"></div>
+            <div class="carousel-indicator" data-slide="1"></div>
+            <div class="carousel-indicator" data-slide="2"></div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section id="home" class="hero-section min-h-screen flex items-center pt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
                     <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                        <span class="neon-text-blue">Venda 24H</span> 
-                        <span class="neon-text-lilac">no WhatsApp</span> 
-                        com IA
+                        <span class="neon-text-blue">Venda 24H</span>
+                         <span class="neon-text-lilac">no WhatsApp</span>
+                         com IA
                     </h1>
                     <p class="text-lg text-gray-300 mb-8">
                         Transforme seu WhatsApp em uma máquina de vendas inteligente que trabalha para você 
@@ -125,9 +262,9 @@
                 </div>
                 <div class="relative">
                     <div class="relative z-10 rounded-xl overflow-hidden neon-border-blue pulse-animation">
-                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" 
-                             alt="Empresário feliz com vendas no WhatsApp" 
-                             class="w-full h-auto object-cover">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+                              alt="Empresário feliz com vendas no WhatsApp"
+                              class="w-full h-auto object-cover">
                     </div>
                     <div class="absolute -bottom-6 -right-6 w-32 h-32 rounded-full gradient-bg opacity-70"></div>
                 </div>
@@ -164,7 +301,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                    <span class="neon-text-blue">Nossos</span> 
+                    <span class="neon-text-blue">Nossos</span>
                     <span class="neon-text-lilac">Serviços</span>
                 </h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -256,7 +393,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                    <span class="neon-text-lilac">Como a IA</span> 
+                    <span class="neon-text-lilac">Como a IA</span>
                     <span class="neon-text-blue">Transforma Seu WhatsApp</span>
                 </h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -276,15 +413,15 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="relative">
                     <div class="relative z-10 rounded-xl overflow-hidden neon-border-lilac">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                             alt="Equipe OMD Digital" 
-                             class="w-full h-auto object-cover">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                              alt="Equipe OMD Digital"
+                              class="w-full h-auto object-cover">
                     </div>
                     <div class="absolute -top-6 -left-6 w-32 h-32 rounded-full gradient-bg opacity-70"></div>
                 </div>
                 <div>
                     <h2 class="text-3xl md:text-5xl font-bold mb-6">
-                        <span class="neon-text-blue">7 Anos</span> 
+                        <span class="neon-text-blue">7 Anos</span>
                         <span class="neon-text-lilac">Transformando Negócios</span>
                     </h2>
                     <p class="text-lg text-gray-300 mb-6">
@@ -320,7 +457,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                    <span class="neon-text-lilac">Clientes</span> 
+                    <span class="neon-text-lilac">Clientes</span>
                     <span class="neon-text-blue">Satisfeitos</span>
                 </h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -331,9 +468,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Cliente 1 - Médico -->
                 <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border-blue client-card transition duration-500">
-                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80" 
-                         alt="Médico feliz" 
-                         class="w-full h-64 object-cover">
+                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80"
+                          alt="Médico feliz"
+                          class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">Dr. Carlos Silva</h3>
                         <p class="text-gray-300 mb-4">Clínica Médica - São Paulo</p>
@@ -346,24 +483,24 @@
                 
                 <!-- Cliente 2 - Dentista -->
                 <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border-lilac client-card transition duration-500">
-                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                         alt="Dentista feliz" 
-                         class="w-full h-64 object-cover">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                          alt="Dentista feliz"
+                          class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">Dra. Ana Oliveira</h3>
                         <p class="text-gray-300 mb-4">Odontologia Estética - Rio de Janeiro</p>
                         <p class="text-gray-300 italic">
                             "Com a IA da OMD, conseguimos triar pacientes, enviar lembretes de consulta e 
-                            oferecer planos de tratamento automaticamente. Faturamento +40% em 3 meses!"
+                            oferecer planos de tratamiento automaticamente. Faturamento +40% em 3 meses!"
                         </p>
                     </div>
                 </div>
                 
                 <!-- Cliente 3 - Hamburgueria -->
                 <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border-blue client-card transition duration-500">
-                    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                         alt="Dono de hamburgueria feliz" 
-                         class="w-full h-64 object-cover">
+                    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                          alt="Dono de hamburgueria feliz"
+                          class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">Ricardo Mendes</h3>
                         <p class="text-gray-300 mb-4">Burger King - Porto Alegre</p>
@@ -388,7 +525,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                    <span class="neon-text-blue">Nosso</span> 
+                    <span class="neon-text-blue">Nosso</span>
                     <span class="neon-text-lilac">Processo</span>
                 </h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -431,6 +568,83 @@
                     <p class="text-gray-300">
                         Capacitação da sua equipe e acompanhamento contínuo
                     </p>
-                </
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Carrossel JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            const prevBtn = document.querySelector('.carousel-prev');
+            const nextBtn = document.querySelector('.carousel-next');
+            let currentIndex = 0;
+            let intervalId;
+            
+            function updateCarousel() {
+                slides.forEach((slide, index) => {
+                    slide.classList.remove('active');
+                    indicators[index].classList.remove('active');
+                });
+                
+                slides[currentIndex].classList.add('active');
+                indicators[currentIndex].classList.add('active');
+            }
+            
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateCarousel();
+            }
+            
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateCarousel();
+            }
+            
+            function startCarousel() {
+                intervalId = setInterval(nextSlide, 5000);
+            }
+            
+            function resetInterval() {
+                clearInterval(intervalId);
+                startCarousel();
+            }
+            
+            // Event listeners
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetInterval();
+            });
+            
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetInterval();
+            });
+            
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                    resetInterval();
+                });
+            });
+            
+            // Start the carousel
+            startCarousel();
+            
+            // Pause on hover
+            const carousel = document.querySelector('.carousel');
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(intervalId);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                startCarousel();
+            });
+        });
+    </script>
+</body>
 </html>
 
