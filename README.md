@@ -192,8 +192,8 @@
         </div>
     </nav>
 
-    <!-- Carrossel -->
-    <div class="carousel mt-20">
+    <!-- Hero Carrossel -->
+    <div class="carousel">
         <!-- Slide 1 -->
         <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
             <div class="carousel-content">
@@ -202,7 +202,7 @@
                 <a href="#servicos" class="gradient-bg text-black font-bold py-3 px-8 rounded-full inline-block hover:opacity-90">Saiba Mais</a>
             </div>
         </div>
-        
+                
         <!-- Slide 2 -->
         <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');">
             <div class="carousel-content">
@@ -211,7 +211,7 @@
                 <a href="#servicos" class="gradient-bg text-black font-bold py-3 px-8 rounded-full inline-block hover:opacity-90">Conheça Nossos Planos</a>
             </div>
         </div>
-        
+                
         <!-- Slide 3 -->
         <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1600267165477-6d19ccd502a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
             <div class="carousel-content">
@@ -220,7 +220,7 @@
                 <a href="#clientes" class="gradient-bg text-black font-bold py-3 px-8 rounded-full inline-block hover:opacity-90">Veja Depoimentos</a>
             </div>
         </div>
-        
+                
         <!-- Botões de navegação -->
         <button class="carousel-nav carousel-prev">
             <i class="fas fa-chevron-left"></i>
@@ -228,7 +228,7 @@
         <button class="carousel-nav carousel-next">
             <i class="fas fa-chevron-right"></i>
         </button>
-        
+                
         <!-- Indicadores -->
         <div class="carousel-indicators">
             <div class="carousel-indicator active" data-slide="0"></div>
@@ -244,8 +244,8 @@
                 <div>
                     <h1 class="text-4xl md:text-6xl font-bold mb-6">
                         <span class="neon-text-blue">Venda 24H</span>
-                         <span class="neon-text-lilac">no WhatsApp</span>
-                         com IA
+                        <span class="neon-text-lilac">no WhatsApp</span>
+                        com IA
                     </h1>
                     <p class="text-lg text-gray-300 mb-8">
                         Transforme seu WhatsApp em uma máquina de vendas inteligente que trabalha para você 
@@ -308,7 +308,7 @@
                     Soluções completas para alavancar seu negócio no digital
                 </p>
             </div>
-            
+                        
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Serviço 1 -->
                 <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 neon-border-blue hover:neon-border-lilac transition duration-500 client-card">
@@ -334,32 +334,32 @@
                         </li>
                     </ul>
                 </div>
-                
+                                
                 <!-- Serviço 2 -->
                 <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 neon-border-lilac hover:neon-border-blue transition duration-500 client-card">
                     <div class="text-5xl neon-text-lilac mb-6">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Super Agentes AI</h3>
+                    <h3 class="text-2xl font-bold mb-4">IA Personalizada</h3>
                     <p class="text-gray-300 mb-6">
-                        Plataforma de IA especializada em atendimento humano e automação para WhatsApp, com respostas inteligentes e gestão de conversas.
+                        Desenvolvemos uma IA exclusiva para sua marca, totalmente personalizada para atender às necessidades específicas do seu negócio.
                     </p>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex items-center">
                             <i class="fas fa-check-circle neon-text-lilac mr-2"></i>
-                            Respostas instantâneas
+                            IA sob medida para sua empresa
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-check-circle neon-text-lilac mr-2"></i>
-                            Atendimento híbrido (bot+humano)
+                            Processamento de áudio inteligente
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-check-circle neon-text-lilac mr-2"></i>
-                            Painel de gestão completo
+                            Entendimento de intenção em mensagens
                         </li>
                     </ul>
                 </div>
-                
+                                
                 <!-- Serviço 3 -->
                 <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 neon-border-blue hover:neon-border-lilac transition duration-500 client-card">
                     <div class="text-5xl neon-text-blue mb-6">
@@ -400,7 +400,7 @@
                     Veja na prática como nossa solução funciona para diferentes negócios
                 </p>
             </div>
-            
+                        
             <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden neon-border-blue glow-hover max-w-4xl mx-auto">
                 <iframe class="w-full h-96" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
@@ -464,7 +464,7 @@
                     Empresários de diversos nichos que transformaram seus resultados com a OMD
                 </p>
             </div>
-            
+                        
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Cliente 1 - Médico -->
                 <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border-blue client-card transition duration-500">
@@ -480,7 +480,7 @@
                         </p>
                     </div>
                 </div>
-                
+                                
                 <!-- Cliente 2 - Dentista -->
                 <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border-lilac client-card transition duration-500">
                     <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
@@ -491,11 +491,11 @@
                         <p class="text-gray-300 mb-4">Odontologia Estética - Rio de Janeiro</p>
                         <p class="text-gray-300 italic">
                             "Com a IA da OMD, conseguimos triar pacientes, enviar lembretes de consulta e 
-                            oferecer planos de tratamiento automaticamente. Faturamento +40% em 3 meses!"
+                            oferecer planos de tratamento automaticamente. Faturamento +40% em 3 meses!"
                         </p>
                     </div>
                 </div>
-                
+                                
                 <!-- Cliente 3 - Hamburgueria -->
                 <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border-blue client-card transition duration-500">
                     <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
@@ -511,7 +511,7 @@
                     </div>
                 </div>
             </div>
-            
+                        
             <div class="mt-12 text-center">
                 <a href="https://dash.superagentes.ai/@omdigital" target="_blank" class="gradient-bg text-black font-bold py-3 px-8 rounded-full hover:opacity-90 transition duration-300 inline-block transform hover:scale-105">
                     Quero Resultados Também
@@ -520,53 +520,47 @@
         </div>
     </section>
 
-    <!-- Processo Section -->
+    <!-- Diferenciais Section -->
     <section class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                    <span class="neon-text-blue">Nosso</span>
-                    <span class="neon-text-lilac">Processo</span>
+                    <span class="neon-text-blue">Por que</span>
+                    <span class="neon-text-lilac">Escolher a OMD</span>
                 </h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Como implementamos a IA no seu WhatsApp em 4 passos simples
+                    Nossos diferenciais que fazem a diferença no seu negócio
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Passo 1 -->
-                <div class="text-center">
-                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">1</div>
-                    <h3 class="text-xl font-bold mb-3 neon-text-blue">Diagnóstico</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl neon-border-blue client-card">
+                    <div class="text-4xl neon-text-blue mb-4">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Implementação Rápida</h3>
                     <p class="text-gray-300">
-                        Análise completa do seu negócio e fluxo de atendimento atual
+                        Em apenas 72 horas seu WhatsApp estará vendendo automaticamente 24 horas por dia.
                     </p>
                 </div>
                 
-                <!-- Passo 2 -->
-                <div class="text-center">
-                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">2</div>
-                    <h3 class="text-xl font-bold mb-3 neon-text-lilac">Personalização</h3>
+                <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl neon-border-lilac client-card">
+                    <div class="text-4xl neon-text-lilac mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Segurança Garantida</h3>
                     <p class="text-gray-300">
-                        Criação do chatbot com sua voz, produtos e fluxos de conversação
+                        Utilizamos a API oficial do WhatsApp com todas as certificações e compliance necessários.
                     </p>
                 </div>
                 
-                <!-- Passo 3 -->
-                <div class="text-center">
-                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">3</div>
-                    <h3 class="text-xl font-bold mb-3 neon-text-blue">Implementação</h3>
+                <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl neon-border-blue client-card">
+                    <div class="text-4xl neon-text-blue mb-4">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Suporte Especializado</h3>
                     <p class="text-gray-300">
-                        Configuração técnica e integração com seus sistemas existentes
-                    </p>
-                </div>
-                
-                <!-- Passo 4 -->
-                <div class="text-center">
-                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">4</div>
-                    <h3 class="text-xl font-bold mb-3 neon-text-lilac">Treinamento</h3>
-                    <p class="text-gray-300">
-                        Capacitação da sua equipe e acompanhamento contínuo
+                        Equipe técnica disponível para tirar dúvidas e fazer ajustes sempre que necessário.
                     </p>
                 </div>
             </div>
@@ -574,75 +568,77 @@
     </section>
 
     <script>
-        // Carrossel JavaScript
         document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
             const slides = document.querySelectorAll('.carousel-slide');
             const indicators = document.querySelectorAll('.carousel-indicator');
             const prevBtn = document.querySelector('.carousel-prev');
             const nextBtn = document.querySelector('.carousel-next');
+            
             let currentIndex = 0;
+            const slideCount = slides.length;
             let intervalId;
             
-            function updateCarousel() {
-                slides.forEach((slide, index) => {
-                    slide.classList.remove('active');
-                    indicators[index].classList.remove('active');
-                });
+            // Function to show slide
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
                 
-                slides[currentIndex].classList.add('active');
-                indicators[currentIndex].classList.add('active');
+                slides[index].classList.add('active');
+                indicators[index].classList.add('active');
+                currentIndex = index;
             }
             
+            // Function for next slide
             function nextSlide() {
-                currentIndex = (currentIndex + 1) % slides.length;
-                updateCarousel();
+                let newIndex = (currentIndex + 1) % slideCount;
+                showSlide(newIndex);
             }
             
+            // Function for previous slide
             function prevSlide() {
-                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                updateCarousel();
+                let newIndex = (currentIndex - 1 + slideCount) % slideCount;
+                showSlide(newIndex);
             }
             
-            function startCarousel() {
-                intervalId = setInterval(nextSlide, 5000);
+            // Start auto rotation
+            function startAutoRotation() {
+                intervalId = setInterval(nextSlide, 5000); // Change slide every 5 seconds
             }
             
-            function resetInterval() {
+            // Stop auto rotation
+            function stopAutoRotation() {
                 clearInterval(intervalId);
-                startCarousel();
             }
             
             // Event listeners
             nextBtn.addEventListener('click', () => {
                 nextSlide();
-                resetInterval();
+                stopAutoRotation();
+                startAutoRotation();
             });
             
             prevBtn.addEventListener('click', () => {
                 prevSlide();
-                resetInterval();
+                stopAutoRotation();
+                startAutoRotation();
             });
             
             indicators.forEach((indicator, index) => {
                 indicator.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateCarousel();
-                    resetInterval();
+                    showSlide(index);
+                    stopAutoRotation();
+                    startAutoRotation();
                 });
             });
             
-            // Start the carousel
-            startCarousel();
-            
             // Pause on hover
-            const carousel = document.querySelector('.carousel');
-            carousel.addEventListener('mouseenter', () => {
-                clearInterval(intervalId);
-            });
+            carousel.addEventListener('mouseenter', stopAutoRotation);
+            carousel.addEventListener('mouseleave', startAutoRotation);
             
-            carousel.addEventListener('mouseleave', () => {
-                startCarousel();
-            });
+            // Initialize
+            showSlide(0);
+            startAutoRotation();
         });
     </script>
 </body>
