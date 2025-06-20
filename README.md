@@ -1,450 +1,397 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
+    <base target="_self">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMD Digital - Agência de IA para WhatsApp e Redes Sociais</title>
+    <title>OMD Digital - Gestão Automatizada em Redes Sociais</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@preline/preline@2.0.0/dist/preline.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-blue': '#00f0ff',
+                        'dark-blue': '#001a33',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --neon-blue: #00f2ff;
-            --neon-lilac: #bc13fe;
-            --dark-bg: #0f0f1a;
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0,31,63,0.9) 0%, rgba(0,0,0,0.8) 100%);
         }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark-bg);
-            color: white;
-            overflow-x: hidden;
-            padding-top: 80px; /* Espaço para a navbar fixa */
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 240, 255, 0.5);
         }
-        
-        .neon-text-blue {
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px rgba(0, 242, 255, 0.7);
+        .neon-border {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.7);
         }
-        
-        .neon-text-lilac {
-            color: var(--neon-lilac);
-            text-shadow: 0 0 10px rgba(188, 19, 254, 0.7);
-        }
-        
-        .neon-border-blue {
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
-        }
-        
-        .neon-border-lilac {
-            border: 2px solid var(--neon-lilac);
-            box-shadow: 0 0 15px rgba(188, 19, 254, 0.5);
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-lilac) 100%);
-        }
-        
-        .hero-section {
-            background: linear-gradient(rgba(15, 15, 26, 0.9), rgba(15, 15, 26, 0.9)),
-                         url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .client-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 242, 255, 0.3), 0 10px 25px rgba(188, 19, 254, 0.3);
-        }
-        
-        .glow-hover:hover {
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.7), 0 0 20px rgba(188, 19, 254, 0.7);
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse-animation {
-            animation: pulse 3s infinite;
-        }
-        
-        /* Carrossel */
-        .carousel {
+        .video-container {
             position: relative;
-            width: 100%;
-            height: 500px;
+            padding-bottom: 56.25%;
+            height: 0;
             overflow: hidden;
         }
-        
-        .carousel-slide {
+        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .carousel-slide.active {
-            opacity: 1;
-        }
-        
-        .carousel-content {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 2rem;
-            border-radius: 15px;
-            max-width: 800px;
-            text-align: center;
-        }
-        
-        .carousel-indicators {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-        
-        .carousel-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .carousel-indicator.active {
-            background-color: var(--neon-blue);
-        }
-        
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            font-size: 1.5rem;
-        }
-        
-        .carousel-prev {
-            left: 20px;
-        }
-        
-        .carousel-next {
-            right: 20px;
-        }
-        
-        .fixed-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
         }
     </style>
 </head>
-<body>
-    <!-- Navbar Fixa -->
-    <nav class="fixed-nav bg-black bg-opacity-90 backdrop-blur-md shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
+<body class="bg-dark-blue text-gray-100 font-sans antialiased">
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-dark-blue/90 backdrop-blur-md border-b border-neon-blue/20">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <span class="text-2xl font-bold neon-text-blue">OMD</span>
-                        <span class="text-2xl font-bold neon-text-lilac">Digital</span>
+                        <span class="text-2xl font-bold text-neon-blue">OMD <span class="text-white">Digital</span></span>
                     </div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#home" class="text-white hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                        <a href="#servicos" class="text-white hover:text-neon-lilac px-3 py-2 rounded-md text-sm font-medium">Serviços</a>
-                        <a href="#sobre" class="text-white hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium">Sobre Nós</a>
-                        <a href="#clientes" class="text-white hover:text-neon-lilac px-3 py-2 rounded-md text-sm font-medium">Clientes</a>
-                        <a href="#contato" class="text-white hover:text-neon-blue px-3 py-2 rounded-md text-sm font-medium">Contato</a>
+                        <a href="#home" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-neon-blue transition">Home</a>
+                        <a href="#services" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-neon-blue transition">Serviços</a>
+                        <a href="#testimonials" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-neon-blue transition">Depoimentos</a>
+                        <a href="#about" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-neon-blue transition">Sobre</a>
+                        <a href="#contact" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-neon-blue transition">Contato</a>
                     </div>
                 </div>
                 <div class="md:hidden">
-                    <button class="text-white focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-neon-blue hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
-        </div>
-    </nav>
-
-    <!-- Hero Carrossel -->
-    <div class="carousel">
-        <!-- Slide 1 -->
-        <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
-            <div class="carousel-content">
-                <h2 class="text-4xl font-bold mb-4 neon-text-blue">Transforme Seu WhatsApp em uma Máquina de Vendas!</h2>
-                <p class="text-xl mb-6">Empresas que adotaram nossa solução de IA para WhatsApp registraram aumento de até 70% nas vendas.</p>
-                <a href="#servicos" class="gradient-bg text-black font-bold py-3 px-8 rounded-full inline-block hover:opacity-90">Saiba Mais</a>
+        </nav>
+        
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden bg-dark-blue border-t border-neon-blue/20">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-neon-blue transition">Home</a>
+                <a href="#services" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-neon-blue transition">Serviços</a>
+                <a href="#testimonials" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-neon-blue transition">Depoimentos</a>
+                <a href="#about" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-neon-blue transition">Sobre</a>
+                <a href="#contact" class="nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-neon-blue transition">Contato</a>
             </div>
         </div>
-                
-        <!-- Slide 2 -->
-        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');">
-            <div class="carousel-content">
-                <h2 class="text-4xl font-bold mb-4 neon-text-lilac">Atendimento 24/7 com Inteligência Artificial</h2>
-                <p class="text-xl mb-6">Nossa IA trabalha enquanto você dorme, respondendo clientes e gerando oportunidades de negócio a qualquer hora.</p>
-                <a href="#servicos" class="gradient-bg text-black font-bold py-3 px-8 rounded-full inline-block hover:opacity-90">Conheça Nossos Planos</a>
-            </div>
-        </div>
-                
-        <!-- Slide 3 -->
-        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1600267165477-6d19ccd502a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
-            <div class="carousel-content">
-                <h2 class="text-4xl font-bold mb-4 neon-text-blue">Clientes Satisfeitos em Todo o Brasil</h2>
-                <p class="text-xl mb-6">Mais de 500 empresas já transformaram seus resultados com nossas soluções tecnológicas.</p>
-                <a href="#clientes" class="gradient-bg text-black font-bold py-3 px-8 rounded-full inline-block hover:opacity-90">Veja Depoimentos</a>
-            </div>
-        </div>
-                
-        <!-- Botões de navegação -->
-        <button class="carousel-nav carousel-prev">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="carousel-nav carousel-next">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-                
-        <!-- Indicadores -->
-        <div class="carousel-indicators">
-            <div class="carousel-indicator active" data-slide="0"></div>
-            <div class="carousel-indicator" data-slide="1"></div>
-            <div class="carousel-indicator" data-slide="2"></div>
-        </div>
-    </div>
+    </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section min-h-screen flex items-center pt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <section id="home" class="hero-gradient pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                        <span class="neon-text-blue">Venda 24H</span>
-                        <span class="neon-text-lilac">no WhatsApp</span>
-                        com IA
+                <div class="space-y-8">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight neon-text">
+                        <span class="block">Transforme Seu Negócio</span>
+                        <span class="text-neon-blue">Com Gestão Automatizada</span>
                     </h1>
-                    <p class="text-lg text-gray-300 mb-8">
-                        Transforme seu WhatsApp em uma máquina de vendas inteligente que trabalha para você 
-                        dia e noite, atendendo clientes e gerando resultados em qualquer nicho de mercado.
+                    <p class="text-xl text-gray-300 max-w-lg">
+                        Tenha uma IA 24h atendendo seus clientes de forma humanizada enquanto você foca no que realmente importa: seu negócio!
                     </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="https://dash.superagentes.ai/@omdigital" target="_blank" class="gradient-bg text-black font-bold py-3 px-8 rounded-full hover:opacity-90 transition duration-300 transform hover:scale-105">
-                            Fale Conosco
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="bg-neon-blue hover:bg-neon-blue/90 text-dark-blue font-bold py-4 px-8 rounded-lg transition duration-300 transform hover:scale-105 text-center">
+                            Fale Conosco Agora
                         </a>
-                        <a href="#servicos" class="neon-border-lilac text-white font-bold py-3 px-8 rounded-full hover:bg-purple-900 hover:bg-opacity-20 transition duration-300 transform hover:scale-105">
-                            Nossos Serviços
+                        <a href="#services" class="border-2 border-neon-blue text-neon-blue hover:bg-neon-blue/10 font-bold py-4 px-8 rounded-lg transition duration-300 transform hover:scale-105 text-center">
+                            Nossos Planos
                         </a>
+                    </div>
+                    <div class="flex items-center space-x-4 pt-4">
+                        <div class="flex -space-x-2">
+                            <img class="w-10 h-10 rounded-full border-2 border-neon-blue" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
+                            <img class="w-10 h-10 rounded-full border-2 border-neon-blue" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
+                            <img class="w-10 h-10 rounded-full border-2 border-neon-blue" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client">
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-300">+500 clientes satisfeitos</p>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="ml-2 text-gray-300">5.0 (200+ reviews)</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="relative">
-                    <div class="relative z-10 rounded-xl overflow-hidden neon-border-blue pulse-animation">
-                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-                              alt="Empresário feliz com vendas no WhatsApp"
-                              class="w-full h-auto object-cover">
+                    <div class="relative rounded-xl overflow-hidden neon-border">
+                        <!-- Carousel -->
+                        <div class="carousel relative h-96 w-full">
+                            <div class="carousel-inner relative w-full overflow-hidden">
+                                <div class="carousel-item active relative float-left w-full">
+                                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="block w-full h-full object-cover" alt="Business people smiling">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-dark-blue/90 via-dark-blue/30 to-transparent"></div>
+                                    <div class="absolute bottom-0 left-0 p-6">
+                                        <h3 class="text-xl font-bold text-white">Gestão Completa para Seu Negócio</h3>
+                                        <p class="text-gray-300">Deixe a OMD Digital cuidar das suas redes sociais</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item relative float-left w-full">
+                                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1484&q=80" class="block w-full h-full object-cover" alt="Team meeting">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-dark-blue/90 via-dark-blue/30 to-transparent"></div>
+                                    <div class="absolute bottom-0 left-0 p-6">
+                                        <h3 class="text-xl font-bold text-white">Atendimento 24h com IA</h3>
+                                        <p class="text-gray-300">Nunca perca um cliente por falta de resposta</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item relative float-left w-full">
+                                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="block w-full h-full object-cover" alt="Business growth">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-dark-blue/90 via-dark-blue/30 to-transparent"></div>
+                                    <div class="absolute bottom-0 left-0 p-6">
+                                        <h3 class="text-xl font-bold text-white">Resultados Comprovados</h3>
+                                        <p class="text-gray-300">Aumente suas vendas com nossas estratégias</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev absolute top-1/2 left-2 transform -translate-y-1/2 bg-neon-blue/30 hover:bg-neon-blue/50 rounded-full p-2 text-white">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-control-next absolute top-1/2 right-2 transform -translate-y-1/2 bg-neon-blue/30 hover:bg-neon-blue/50 rounded-full p-2 text-white">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="absolute -bottom-6 -right-6 w-32 h-32 rounded-full gradient-bg opacity-70"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16 bg-black bg-opacity-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="bg-dark-blue py-12 px-4 sm:px-6 lg:px-8 border-b border-neon-blue/20">
+        <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="p-6 rounded-xl bg-gray-900 bg-opacity-50 neon-border-blue">
-                    <div class="text-4xl font-bold neon-text-blue mb-2">7+</div>
-                    <div class="text-gray-300">Anos no mercado</div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-neon-blue mb-2">24/7</div>
+                    <div class="text-gray-300">Atendimento</div>
                 </div>
-                <div class="p-6 rounded-xl bg-gray-900 bg-opacity-50 neon-border-lilac">
-                    <div class="text-4xl font-bold neon-text-lilac mb-2">500+</div>
-                    <div class="text-gray-300">Clientes atendidos</div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-neon-blue mb-2">500+</div>
+                    <div class="text-gray-300">Clientes</div>
                 </div>
-                <div class="p-6 rounded-xl bg-gray-900 bg-opacity-50 neon-border-blue">
-                    <div class="text-4xl font-bold neon-text-blue mb-2">24/7</div>
-                    <div class="text-gray-300">Vendas automáticas</div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-neon-blue mb-2">98%</div>
+                    <div class="text-gray-300">Satisfação</div>
                 </div>
-                <div class="p-6 rounded-xl bg-gray-900 bg-opacity-50 neon-border-lilac">
-                    <div class="text-4xl font-bold neon-text-lilac mb-2">10+</div>
-                    <div class="text-gray-300">Países atendidos</div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-neon-blue mb-2">3x</div>
+                    <div class="text-gray-300">Mais Vendas</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Serviços Section -->
-    <section id="servicos" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-blue">
+        <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                    <span class="neon-text-blue">Nossos</span>
-                    <span class="neon-text-lilac">Serviços</span>
-                </h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Soluções completas para alavancar seu negócio no digital
-                </p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 neon-text">Nossos <span class="text-neon-blue">Serviços</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Oferecemos soluções completas para impulsionar seu negócio nas redes sociais</p>
             </div>
-                        
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Serviço 1 -->
-                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 neon-border-blue hover:neon-border-lilac transition duration-500 client-card">
-                    <div class="text-5xl neon-text-blue mb-6">
-                        <i class="fab fa-whatsapp"></i>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic Plan -->
+                <div class="bg-gray-900 rounded-xl p-8 border border-neon-blue/20 hover:border-neon-blue transition duration-300 transform hover:scale-105">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-neon-blue mb-2">Pacote Básico</h3>
+                        <p class="text-gray-300">Gestão essencial para pequenos negócios</p>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Automação WhatsApp</h3>
-                    <p class="text-gray-300 mb-6">
-                        Soluções completas de automação para WhatsApp Business com IA, incluindo chatbots inteligentes, fluxos de atendimento e integração com CRMs.
-                    </p>
-                    <ul class="space-y-2 text-gray-300">
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">R$149,90</span>
+                        <span class="text-gray-400">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
                         <li class="flex items-center">
-                            <i class="fas fa-check-circle neon-text-blue mr-2"></i>
-                            Chatbots 24/7 com IA
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>Gestão de 2 redes sociais</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-check-circle neon-text-blue mr-2"></i>
-                            Atendimento multicanal
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>10 posts/mês</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-check-circle neon-text-blue mr-2"></i>
-                            Integração com API oficial
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>Relatórios mensais</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-times text-red-400 mr-2"></i>
+                            <span>Sem IA</span>
                         </li>
                     </ul>
+                    <a href="#contact" class="block w-full bg-neon-blue hover:bg-neon-blue/90 text-dark-blue font-bold py-3 px-6 rounded-lg text-center transition">Contratar</a>
                 </div>
-                                
-                <!-- Serviço 2 -->
-                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 neon-border-lilac hover:neon-border-blue transition duration-500 client-card">
-                    <div class="text-5xl neon-text-lilac mb-6">
-                        <i class="fas fa-robot"></i>
+                
+                <!-- Premium Plan -->
+                <div class="bg-gray-900 rounded-xl p-8 border-2 border-neon-blue transform scale-105 relative">
+                    <div class="absolute top-0 right-0 bg-neon-blue text-dark-blue text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">MAIS POPULAR</div>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-neon-blue mb-2">Pacote Premium</h3>
+                        <p class="text-gray-300">Solução completa com IA para médias empresas</p>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">IA Personalizada</h3>
-                    <p class="text-gray-300 mb-6">
-                        Desenvolvemos uma IA exclusiva para sua marca, totalmente personalizada para atender às necessidades específicas do seu negócio.
-                    </p>
-                    <ul class="space-y-2 text-gray-300">
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">R$450,00</span>
+                        <span class="text-gray-400">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
                         <li class="flex items-center">
-                            <i class="fas fa-check-circle neon-text-lilac mr-2"></i>
-                            IA sob medida para sua empresa
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>Gestão de 5 redes sociais</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-check-circle neon-text-lilac mr-2"></i>
-                            Processamento de áudio inteligente
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>30 posts/mês</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-check-circle neon-text-lilac mr-2"></i>
-                            Entendimento de intenção em mensagens
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>IA 24h atendendo clientes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>Relatórios semanais</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>Estratégias personalizadas</span>
                         </li>
                     </ul>
+                    <a href="#contact" class="block w-full bg-neon-blue hover:bg-neon-blue/90 text-dark-blue font-bold py-3 px-6 rounded-lg text-center transition">Contratar</a>
                 </div>
-                                
-                <!-- Serviço 3 -->
-                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 neon-border-blue hover:neon-border-lilac transition duration-500 client-card">
-                    <div class="text-5xl neon-text-blue mb-6">
-                        <i class="fas fa-chart-line"></i>
+                
+                <!-- Enterprise Plan -->
+                <div class="bg-gray-900 rounded-xl p-8 border border-neon-blue/20 hover:border-neon-blue transition duration-300 transform hover:scale-105">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-neon-blue mb-2">Pacote Empresarial</h3>
+                        <p class="text-gray-300">Solução completa para grandes negócios</p>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Consultoria WhatsApp</h3>
-                    <p class="text-gray-300 mb-6">
-                        Estratégias personalizadas para implementação e otimização de WhatsApp Business em diferentes modelos de negócio.
-                    </p>
-                    <ul class="space-y-2 text-gray-300">
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">R$999,00</span>
+                        <span class="text-gray-400">/mês</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
                         <li class="flex items-center">
-                            <i class="fas fa-check-circle neon-text-blue mr-2"></i>
-                            Diagnóstico de fluxos
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>Gestão ilimitada de redes</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-check-circle neon-text-blue mr-2"></i>
-                            Estratégias de conversão
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>Posts diários</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-check-circle neon-text-blue mr-2"></i>
-                            Métricas e analytics
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>IA 24h avançada</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>Relatórios diários</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>Consultoria estratégica</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-neon-blue mr-2"></i>
+                            <span>Gestor dedicado</span>
                         </li>
                     </ul>
+                    <a href="#contact" class="block w-full bg-neon-blue hover:bg-neon-blue/90 text-dark-blue font-bold py-3 px-6 rounded-lg text-center transition">Contratar</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Video Section -->
-    <section class="py-20 bg-black bg-opacity-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                    <span class="neon-text-lilac">Como a IA</span>
-                    <span class="neon-text-blue">Transforma Seu WhatsApp</span>
-                </h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Veja na prática como nossa solução funciona para diferentes negócios
-                </p>
-            </div>
-                        
-            <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden neon-border-blue glow-hover max-w-4xl mx-auto">
-                <iframe class="w-full h-96" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sobre Nós Section -->
-    <section id="sobre" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- AI Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-dark-blue to-gray-900">
+        <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="relative">
-                    <div class="relative z-10 rounded-xl overflow-hidden neon-border-lilac">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                              alt="Equipe OMD Digital"
-                              class="w-full h-auto object-cover">
-                    </div>
-                    <div class="absolute -top-6 -left-6 w-32 h-32 rounded-full gradient-bg opacity-70"></div>
+                <div class="order-2 md:order-1">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 neon-text">IA 24h <span class="text-neon-blue">Humanizada</span></h2>
+                    <p class="text-xl text-gray-300 mb-6">
+                        Nossa inteligência artificial atende seus clientes de forma natural e humanizada, garantindo que nenhuma mensagem fique sem resposta, mesmo fora do horário comercial.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-neon-blue mt-1 mr-3"></i>
+                            <span class="text-gray-300">Respostas instantâneas 24 horas por dia</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-neon-blue mt-1 mr-3"></i>
+                            <span class="text-gray-300">Tom de voz personalizado para sua marca</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-neon-blue mt-1 mr-3"></i>
+                            <span class="text-gray-300">Aprendizado contínuo para melhor atendimento</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-neon-blue mt-1 mr-3"></i>
+                            <span class="text-gray-300">Integração com WhatsApp, Instagram e Facebook</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-block bg-neon-blue hover:bg-neon-blue/90 text-dark-blue font-bold py-3 px-6 rounded-lg transition">Saiba Mais</a>
                 </div>
-                <div>
-                    <h2 class="text-3xl md:text-5xl font-bold mb-6">
-                        <span class="neon-text-blue">7 Anos</span>
-                        <span class="neon-text-lilac">Transformando Negócios</span>
-                    </h2>
-                    <p class="text-lg text-gray-300 mb-6">
-                        Desde 2016, a OMD Digital vem revolucionando a forma como empresas se comunicam e vendem 
-                        no ambiente digital. Começamos como especialistas em marketing tradicional e evoluímos 
-                        para nos tornarmos referência em inteligência artificial aplicada ao WhatsApp.
-                    </p>
-                    <p class="text-lg text-gray-300 mb-6">
-                        Nossa missão é democratizar o acesso à tecnologia de ponta, permitindo que empresas de 
-                        todos os tamanhos e segmentos possam competir em igualdade com os grandes players.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <div class="p-4 rounded-lg bg-gray-900 bg-opacity-50 neon-border-blue">
-                            <div class="text-xl font-bold neon-text-blue mb-1">Missão</div>
-                            <div class="text-gray-300">Transformar comunicação em vendas</div>
-                        </div>
-                        <div class="p-4 rounded-lg bg-gray-900 bg-opacity-50 neon-border-lilac">
-                            <div class="text-xl font-bold neon-text-lilac mb-1">Visão</div>
-                            <div class="text-gray-300">Ser líder em IA para WhatsApp</div>
-                        </div>
-                        <div class="p-4 rounded-lg bg-gray-900 bg-opacity-50 neon-border-blue">
-                            <div class="text-xl font-bold neon-text-blue mb-1">Valores</div>
-                            <div class="text-gray-300">Inovação, Resultados, Ética</div>
+                <div class="order-1 md:order-2">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-neon-blue/20 rounded-2xl -rotate-6"></div>
+                        <div class="relative bg-gray-900 rounded-2xl p-6 border border-neon-blue/30">
+                            <div class="flex items-center mb-4">
+                                <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                <div class="ml-auto text-sm text-gray-400">IA Chat</div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <img src="https://randomuser.me/api/portraits/women/33.jpg" class="w-8 h-8 rounded-full mr-3" alt="Client">
+                                    <div class="bg-gray-800 rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">Olá, gostaria de saber o horário de funcionamento hoje</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start justify-end">
+                                    <div class="bg-neon-blue text-dark-blue rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">Olá! Nosso horário hoje é das 10h às 22h. Posso ajudar com mais alguma coisa? 😊</p>
+                                    </div>
+                                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80" class="w-8 h-8 rounded-full ml-3" alt="OMD AI">
+                                </div>
+                                <div class="flex items-start">
+                                    <img src="https://randomuser.me/api/portraits/women/33.jpg" class="w-8 h-8 rounded-full mr-3" alt="Client">
+                                    <div class="bg-gray-800 rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">Tem promoção para aniversariantes?</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start justify-end">
+                                    <div class="bg-neon-blue text-dark-blue rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm">Sim! Aniversariantes ganham 20% de desconto apresentando documento com foto. Posso reservar uma mesa para você? 🎉</p>
+                                    </div>
+                                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80" class="w-8 h-8 rounded-full ml-3" alt="OMD AI">
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-800">
+                                <div class="flex items-center">
+                                    <input type="text" placeholder="Digite sua mensagem..." class="flex-1 bg-gray-800 rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-neon-blue">
+                                    <button class="ml-2 bg-neon-blue text-dark-blue rounded-full p-2">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -452,193 +399,524 @@
         </div>
     </section>
 
-    <!-- Clientes Section -->
-    <section id="clientes" class="py-20 bg-black bg-opacity-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-blue">
+        <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                    <span class="neon-text-lilac">Clientes</span>
-                    <span class="neon-text-blue">Satisfeitos</span>
-                </h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Empresários de diversos nichos que transformaram seus resultados com a OMD
-                </p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 neon-text">Depoimentos de <span class="text-neon-blue">Clientes</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Empresários que transformaram seus negócios com a OMD Digital</p>
             </div>
-                        
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Cliente 1 - Médico -->
-                <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border-blue client-card transition duration-500">
-                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80"
-                          alt="Médico feliz"
-                          class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Dr. Carlos Silva</h3>
-                        <p class="text-gray-300 mb-4">Clínica Médica - São Paulo</p>
-                        <p class="text-gray-300 italic">
-                            "A OMD implementou um chatbot no WhatsApp que agenda consultas 24 horas por dia. 
-                            Nossas vagas passaram a ser preenchidas 3x mais rápido!"
-                        </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Pizza Place -->
+                <div class="bg-gray-900 rounded-xl p-8 border border-neon-blue/20 hover:border-neon-blue transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-16 h-16 rounded-full border-2 border-neon-blue mr-4" alt="Pizzaria Owner">
+                        <div>
+                            <h4 class="text-xl font-bold">Carlos Silva</h4>
+                            <p class="text-neon-blue">Pizzaria Sabor da Vila</p>
+                        </div>
+                    </div>
+                    <div class="text-gray-300 mb-6">
+                        <p>"A OMD Digital revolucionou nosso atendimento. A IA responde clientes mesmo de madrugada e nossas vendas aumentaram 40% em 3 meses!"</p>
+                    </div>
+                    <div class="flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
                     </div>
                 </div>
-                                
-                <!-- Cliente 2 - Dentista -->
-                <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border-lilac client-card transition duration-500">
-                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                          alt="Dentista feliz"
-                          class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Dra. Ana Oliveira</h3>
-                        <p class="text-gray-300 mb-4">Odontologia Estética - Rio de Janeiro</p>
-                        <p class="text-gray-300 italic">
-                            "Com a IA da OMD, conseguimos triar pacientes, enviar lembretes de consulta e 
-                            oferecer planos de tratamento automaticamente. Faturamento +40% em 3 meses!"
-                        </p>
+                
+                <!-- Hair Salon -->
+                <div class="bg-gray-900 rounded-xl p-8 border border-neon-blue/20 hover:border-neon-blue transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-16 h-16 rounded-full border-2 border-neon-blue mr-4" alt="Salon Owner">
+                        <div>
+                            <h4 class="text-xl font-bold">Ana Paula</h4>
+                            <p class="text-neon-blue">Salão Bella Donna</p>
+                        </div>
+                    </div>
+                    <div class="text-gray-300 mb-6">
+                        <p>"Nunca mais perdi uma cliente por falta de resposta. A IA agenda horários e envia lembretes automaticamente. Minha agenda está sempre cheia!"</p>
+                    </div>
+                    <div class="flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
                     </div>
                 </div>
-                                
-                <!-- Cliente 3 - Hamburgueria -->
-                <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden neon-border-blue client-card transition duration-500">
-                    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                          alt="Dono de hamburgueria feliz"
-                          class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Ricardo Mendes</h3>
-                        <p class="text-gray-300 mb-4">Burger King - Porto Alegre</p>
-                        <p class="text-gray-300 italic">
-                            "O WhatsApp automatizado da OMD recebe pedidos, envia cardápios e promoções. 
-                            Reduzimos 70% do tempo da equipe no atendimento e aumentamos as vendas em 60%."
-                        </p>
+                
+                <!-- Car Dealership -->
+                <div class="bg-gray-900 rounded-xl p-8 border border-neon-blue/20 hover:border-neon-blue transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" class="w-16 h-16 rounded-full border-2 border-neon-blue mr-4" alt="Dealership Owner">
+                        <div>
+                            <h4 class="text-xl font-bold">Roberto Almeida</h4>
+                            <p class="text-neon-blue">Auto Premium</p>
+                        </div>
+                    </div>
+                    <div class="text-gray-300 mb-6">
+                        <p>"Com a gestão da OMD, nossos anúncios de carros têm 3x mais engajamento. A IA qualifica leads e agenda test-drives automaticamente. Impressionante!"</p>
+                    </div>
+                    <div class="flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
                     </div>
                 </div>
             </div>
+            
+            <!-- More testimonials in a carousel -->
+            <div class="mt-12">
+                <div class="carousel-testimonials relative">
+                    <div class="carousel-testimonials-inner flex overflow-x-auto snap-x snap-mandatory space-x-6 pb-6">
+                        <!-- Clinic -->
+                        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start">
+                            <div class="bg-gray-900 rounded-xl p-8 border border-neon-blue/20">
+                                <div class="flex items-center mb-6">
+                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-16 h-16 rounded-full border-2 border-neon-blue mr-4" alt="Clinic Owner">
+                                    <div>
+                                        <h4 class="text-xl font-bold">Dra. Juliana</h4>
+                                        <p class="text-neon-blue">Clínica Saúde Total</p>
+                                    </div>
+                                </div>
+                                <div class="text-gray-300 mb-6">
+                                    <p>"Nossa clínica nunca teve tanta visibilidade. A IA responde dúvidas sobre planos de saúde e marca consultas 24h por dia. Pacientes adoram!"</p>
+                                </div>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
+                        </div>
                         
-            <div class="mt-12 text-center">
-                <a href="https://dash.superagentes.ai/@omdigital" target="_blank" class="gradient-bg text-black font-bold py-3 px-8 rounded-full hover:opacity-90 transition duration-300 inline-block transform hover:scale-105">
-                    Quero Resultados Também
+                        <!-- Restaurant -->
+                        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start">
+                            <div class="bg-gray-900 rounded-xl p-8 border border-neon-blue/20">
+                                <div class="flex items-center mb-6">
+                                    <img src="https://randomuser.me/api/portraits/men/65.jpg" class="w-16 h-16 rounded-full border-2 border-neon-blue mr-4" alt="Restaurant Owner">
+                                    <div>
+                                        <h4 class="text-xl font-bold">Marcos Oliveira</h4>
+                                        <p class="text-neon-blue">Restaurante Sabor & Arte</p>
+                                    </div>
+                                </div>
+                                <div class="text-gray-300 mb-6">
+                                    <p>"As postagens diárias e stories automatizados triplicaram nosso movimento. A IA até sugere pratos do dia baseado no estoque. Genial!"</p>
+                                </div>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Lawyer -->
+                        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start">
+                            <div class="bg-gray-900 rounded-xl p-8 border border-neon-blue/20">
+                                <div class="flex items-center mb-6">
+                                    <img src="https://randomuser.me/api/portraits/women/32.jpg" class="w-16 h-16 rounded-full border-2 border-neon-blue mr-4" alt="Lawyer">
+                                    <div>
+                                        <h4 class="text-xl font-bold">Dra. Fernanda</h4>
+                                        <p class="text-neon-blue">Advocacia Lima & Associados</p>
+                                    </div>
+                                </div>
+                                <div class="text-gray-300 mb-6">
+                                    <p>"A IA qualifica clientes e agenda consultas jurídicas. Nossa produtividade aumentou e os clientes ficam impressionados com o atendimento."</p>
+                                </div>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-testimonials-prev absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-4 bg-neon-blue/30 hover:bg-neon-blue/50 rounded-full p-3 text-white">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-testimonials-next absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-4 bg-neon-blue/30 hover:bg-neon-blue/50 rounded-full p-3 text-white">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Inspiration Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-900 to-dark-blue">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 neon-text">Inspiração para <span class="text-neon-blue">Seu Negócio</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Assista e inspire-se com histórias de sucesso</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="video-container rounded-xl overflow-hidden neon-border">
+                    <iframe src="https://www.youtube.com/embed/0loRNim6wwc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-container rounded-xl overflow-hidden neon-border">
+                    <iframe src="https://www.youtube.com/embed/A4pba47DCUg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-container rounded-xl overflow-hidden neon-border">
+                    <iframe src="https://www.youtube.com/embed/4m_fQVOrm7w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-blue">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 neon-text">Sobre a <span class="text-neon-blue">OMD Digital</span></h2>
+                    <p class="text-xl text-gray-300 mb-6">
+                        Somos uma agência especializada em gestão automatizada de redes sociais com inteligência artificial, ajudando empresas de todos os tamanhos a alcançarem seu potencial máximo no digital.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-neon-blue mt-1 mr-3"></i>
+                            <span class="text-gray-300">Atendimento 24 horas para Brasil e exterior</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-neon-blue mt-1 mr-3"></i>
+                            <span class="text-gray-300">Equipe especializada em mais de 15 nichos de mercado</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-neon-blue mt-1 mr-3"></i>
+                            <span class="text-gray-300">Tecnologia de ponta com IA humanizada</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-neon-blue mt-1 mr-3"></i>
+                            <span class="text-gray-300">Resultados comprovados e mensuráveis</span>
+                        </li>
+                    </ul>
+                    <div class="flex space-x-4">
+                        <a href="https://instagram.com/omdagenciadigitaloficial" target="_blank" class="social-link bg-gray-800 hover:bg-pink-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com/omddigital" target="_blank" class="social-link bg-gray-800 hover:bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="mailto:oliveiamarketing28@gmail.com" class="social-link bg-gray-800 hover:bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 bg-neon-blue/20 rounded-2xl rotate-6"></div>
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="relative rounded-2xl w-full h-auto" alt="OMD Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-neon-blue to-blue-500">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-dark-blue">Pronto para Transformar Seu Negócio?</h2>
+            <p class="text-xl text-dark-blue/90 mb-8 max-w-3xl mx-auto">
+                Comece hoje mesmo e tenha uma IA 24h atendendo seus clientes enquanto você foca no crescimento do seu negócio.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://wa.me/5538999857924" class="bg-dark-blue hover:bg-black text-neon-blue font-bold py-4 px-8 rounded-lg transition duration-300 transform hover:scale-105 text-center">
+                    <i class="fab fa-whatsapp mr-2"></i> Fale no WhatsApp
+                </a>
+                <a href="#contact" class="border-2 border-dark-blue text-dark-blue hover:bg-dark-blue/10 font-bold py-4 px-8 rounded-lg transition duration-300 transform hover:scale-105 text-center">
+                    Outras Formas de Contato
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Diferenciais Section -->
-    <section class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">
-                    <span class="neon-text-blue">Por que</span>
-                    <span class="neon-text-lilac">Escolher a OMD</span>
-                </h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Nossos diferenciais que fazem a diferença no seu negócio
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl neon-border-blue client-card">
-                    <div class="text-4xl neon-text-blue mb-4">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Implementação Rápida</h3>
-                    <p class="text-gray-300">
-                        Em apenas 72 horas seu WhatsApp estará vendendo automaticamente 24 horas por dia.
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-blue">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 neon-text">Entre em <span class="text-neon-blue">Contato</span></h2>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Tem dúvidas ou quer saber mais sobre nossos serviços? Preencha o formulário ou entre em contato diretamente por nossos canais.
                     </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-neon-blue/20 p-3 rounded-lg mr-4">
+                                <i class="fas fa-phone-alt text-neon-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-neon-blue mb-1">Telefone/WhatsApp</h4>
+                                <a href="https://wa.me/5538999857924" class="text-gray-300 hover:text-neon-blue transition">(38) 99985-7924</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-neon-blue/20 p-3 rounded-lg mr-4">
+                                <i class="fas fa-envelope text-neon-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-neon-blue mb-1">Email</h4>
+                                <a href="mailto:oliveiamarketing28@gmail.com" class="text-gray-300 hover:text-neon-blue transition">oliveiamarketing28@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-neon-blue/20 p-3 rounded-lg mr-4">
+                                <i class="fas fa-map-marker-alt text-neon-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-neon-blue mb-1">Redes Sociais</h4>
+                                <div class="flex space-x-4">
+                                    <a href="https://instagram.com/omdagenciadigitaloficial" target="_blank" class="text-gray-300 hover:text-neon-blue transition">
+                                        <i class="fab fa-instagram text-xl"></i>
+                                    </a>
+                                    <a href="https://facebook.com/omddigital" target="_blank" class="text-gray-300 hover:text-neon-blue transition">
+                                        <i class="fab fa-facebook-f text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl neon-border-lilac client-card">
-                    <div class="text-4xl neon-text-lilac mb-4">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Segurança Garantida</h3>
-                    <p class="text-gray-300">
-                        Utilizamos a API oficial do WhatsApp com todas as certificações e compliance necessários.
-                    </p>
-                </div>
-                
-                <div class="bg-gray-900 bg-opacity-50 p-8 rounded-xl neon-border-blue client-card">
-                    <div class="text-4xl neon-text-blue mb-4">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Suporte Especializado</h3>
-                    <p class="text-gray-300">
-                        Equipe técnica disponível para tirar dúvidas e fazer ajustes sempre que necessário.
-                    </p>
+                <div>
+                    <form class="bg-gray-900 rounded-xl p-8 border border-neon-blue/20">
+                        <div class="grid grid-cols-1 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-300 mb-2">Nome</label>
+                                <input type="text" id="name" class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-neon-blue text-white" placeholder="Seu nome completo">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-300 mb-2">Email</label>
+                                <input type="email" id="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-neon-blue text-white" placeholder="seu@email.com">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-300 mb-2">Telefone</label>
+                                <input type="tel" id="phone" class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-neon-blue text-white" placeholder="(00) 00000-0000">
+                            </div>
+                            <div>
+                                <label for="business" class="block text-gray-300 mb-2">Tipo de Negócio</label>
+                                <select id="business" class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-neon-blue text-white">
+                                    <option value="">Selecione...</option>
+                                    <option value="restaurant">Restaurante/Lanchonete</option>
+                                    <option value="salon">Salão de Beleza</option>
+                                    <option value="clinic">Clínica Médica</option>
+                                    <option value="lawyer">Advocacia</option>
+                                    <option value="auto">Loja de Automóveis</option>
+                                    <option value="other">Outro</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-gray-300 mb-2">Mensagem</label>
+                                <textarea id="message" rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-neon-blue text-white" placeholder="Conte-nos sobre seu negócio e como podemos ajudar"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full bg-neon-blue hover:bg-neon-blue/90 text-dark-blue font-bold py-3 px-6 rounded-lg transition">Enviar Mensagem</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 border-t border-neon-blue/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-neon-blue mb-4">OMD Digital</h3>
+                    <p class="text-gray-400">
+                        Transformando negócios através da gestão automatizada em redes sociais com inteligência artificial.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Serviços</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-400 hover:text-neon-blue transition">Pacote Básico</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-neon-blue transition">Pacote Premium</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-neon-blue transition">Pacote Empresarial</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-neon-blue transition">IA 24h Humanizada</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-neon-blue transition">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-neon-blue transition">Serviços</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-neon-blue transition">Depoimentos</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-neon-blue transition">Sobre</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-neon-blue transition">Contato</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Contato</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-neon-blue mr-2"></i>
+                            <a href="https://wa.me/5538999857924" class="text-gray-400 hover:text-neon-blue transition">(38) 99985-7924</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-neon-blue mr-2"></i>
+                            <a href="mailto:oliveiamarketing28@gmail.com" class="text-gray-400 hover:text-neon-blue transition">oliveiamarketing28@gmail.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-instagram text-neon-blue mr-2"></i>
+                            <a href="https://instagram.com/omdagenciadigitaloficial" target="_blank" class="text-gray-400 hover:text-neon-blue transition">@omdagenciadigitaloficial</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-facebook-f text-neon-blue mr-2"></i>
+                            <a href="https://facebook.com/omddigital" target="_blank" class="text-gray-400 hover:text-neon-blue transition">Omd omddigital</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 OMD Digital. Todos os direitos reservados.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-neon-blue transition text-sm">Termos de Serviço</a>
+                    <a href="#" class="text-gray-400 hover:text-neon-blue transition text-sm">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top fixed bottom-8 right-8 bg-neon-blue text-dark-blue w-12 h-12 rounded-full flex items-center justify-center opacity-0 invisible transition-all duration-300 transform translate-y-4">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const carousel = document.querySelector('.carousel');
-            const slides = document.querySelectorAll('.carousel-slide');
-            const indicators = document.querySelectorAll('.carousel-indicator');
-            const prevBtn = document.querySelector('.carousel-prev');
-            const nextBtn = document.querySelector('.carousel-next');
-            
-            let currentIndex = 0;
-            const slideCount = slides.length;
-            let intervalId;
-            
-            // Function to show slide
-            function showSlide(index) {
-                slides.forEach(slide => slide.classList.remove('active'));
-                indicators.forEach(indicator => indicator.classList.remove('active'));
-                
-                slides[index].classList.add('active');
-                indicators[index].classList.add('active');
-                currentIndex = index;
-            }
-            
-            // Function for next slide
-            function nextSlide() {
-                let newIndex = (currentIndex + 1) % slideCount;
-                showSlide(newIndex);
-            }
-            
-            // Function for previous slide
-            function prevSlide() {
-                let newIndex = (currentIndex - 1 + slideCount) % slideCount;
-                showSlide(newIndex);
-            }
-            
-            // Start auto rotation
-            function startAutoRotation() {
-                intervalId = setInterval(nextSlide, 5000); // Change slide every 5 seconds
-            }
-            
-            // Stop auto rotation
-            function stopAutoRotation() {
-                clearInterval(intervalId);
-            }
-            
-            // Event listeners
-            nextBtn.addEventListener('click', () => {
-                nextSlide();
-                stopAutoRotation();
-                startAutoRotation();
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.mobile-menu').classList.add('hidden');
+                }
             });
-            
-            prevBtn.addEventListener('click', () => {
-                prevSlide();
-                stopAutoRotation();
-                startAutoRotation();
+        });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
             });
+        }
+
+        document.querySelector('.carousel-control-prev').addEventListener('click', function() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        });
+
+        document.querySelector('.carousel-control-next').addEventListener('click', function() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        });
+
+        // Testimonials carousel
+        const testimonialsInner = document.querySelector('.carousel-testimonials-inner');
+        const testimonials = document.querySelectorAll('.carousel-testimonials-inner > div');
+        let currentTestimonial = 0;
+        const totalTestimonials = testimonials.length;
+
+        function scrollTestimonial(direction) {
+            if (direction === 'next') {
+                currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+            } else {
+                currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+            }
             
-            indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => {
-                    showSlide(index);
-                    stopAutoRotation();
-                    startAutoRotation();
-                });
+            const scrollPosition = testimonials[currentTestimonial].offsetLeft - 
+                                 testimonialsInner.offsetLeft;
+            
+            testimonialsInner.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
             });
-            
-            // Pause on hover
-            carousel.addEventListener('mouseenter', stopAutoRotation);
-            carousel.addEventListener('mouseleave', startAutoRotation);
-            
-            // Initialize
-            showSlide(0);
-            startAutoRotation();
+        }
+
+        document.querySelector('.carousel-testimonials-prev').addEventListener('click', () => scrollTestimonial('prev'));
+        document.querySelector('.carousel-testimonials-next').addEventListener('click', () => scrollTestimonial('next'));
+
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+                backToTopButton.classList.add('opacity-100', 'visible', 'translate-y-0');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                backToTopButton.classList.add('opacity-0', 'invisible', 'translate-y-4');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            this.reset();
+        });
+
+        // Social links
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open(this.getAttribute('href'), '_blank');
+            });
+        });
+
+        // Nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     </script>
 </body>
