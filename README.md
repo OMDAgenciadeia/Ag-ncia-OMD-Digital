@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="pt-BR" class="scroll-smooth">
 <head>
     <base target="_self">
