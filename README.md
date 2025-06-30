@@ -246,7 +246,7 @@
                     <div class="absolute top-0 right-0 bg-neon-blue text-dark-blue text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">MAIS POPULAR</div>
                     <div class="mb-6">
                         <h3 class="text-2xl font-bold text-neon-blue mb-2">Pacote Premium</h3>
-                        <p class="text-gray-300">Solução completa com IA para médias empresas</p>
+                        <p class="text-gray-300">Solução com automação para médias empresas</p>
                     </div>
                     <div class="mb-6">
                         <span class="text-4xl font-bold">R$550,00</span>
