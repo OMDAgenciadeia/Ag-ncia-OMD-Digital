@@ -249,13 +249,13 @@
                         <p class="text-gray-300">Solução completa com IA para médias empresas</p>
                     </div>
                     <div class="mb-6">
-                        <span class="text-4xl font-bold">R$450,00</span>
+                        <span class="text-4xl font-bold">R$550,00</span>
                         <span class="text-gray-400">/mês</span>
                     </div>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center">
                             <i class="fas fa-check text-neon-blue mr-2"></i>
-                            <span>Gestão de 5 redes sociais</span>
+                            <span>Gestão de 4 redes sociais</span>
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-check text-neon-blue mr-2"></i>
@@ -284,7 +284,7 @@
                         <p class="text-gray-300">Solução completa para grandes negócios</p>
                     </div>
                     <div class="mb-6">
-                        <span class="text-4xl font-bold">R$999,00</span>
+                        <span class="text-4xl font-bold">R$1.599,00</span>
                         <span class="text-gray-400">/mês</span>
                     </div>
                     <ul class="space-y-3 mb-8">
