@@ -263,7 +263,7 @@
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-check text-neon-blue mr-2"></i>
-                            <span>IA 24h atendendo clientes</span>
+                            <span>Automação no instagram</span>
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-check text-neon-blue mr-2"></i>
