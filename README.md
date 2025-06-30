@@ -284,7 +284,7 @@
                         <p class="text-gray-300">Solução completa para grandes negócios</p>
                     </div>
                     <div class="mb-6">
-                        <span class="text-4xl font-bold">R$1.599,00</span>
+                        <span class="text-4xl font-bold">R$2.599,00</span>
                         <span class="text-gray-400">/mês</span>
                     </div>
                     <ul class="space-y-3 mb-8">
